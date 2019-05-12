@@ -25,10 +25,10 @@ node(13,:) = [-10 0 0];
 node(14,:) = [-10 inlet_d 0];
 node(15,:) = [-10 0 .01];
 node(16,:) = [-10 inlet_d .01];
-node(17,:) = [node(4,1)+10 node(4,2) 0];
-node(18,:) = [node(4,1)+10 node(4,2)+outlet_d 0];
-node(19,:) = [node(4,1)+10 node(4,2) .01];
-node(20,:) = [node(4,1)+10 node(4,2)+outlet_d .01];
+node(17,:) = [node(3,1)+10 node(3,2) 0];
+node(18,:) = [node(3,1)+10 node(3,2)+outlet_d 0];
+node(19,:) = [node(3,1)+10 node(3,2) .01];
+node(20,:) = [node(3,1)+10 node(3,2)+outlet_d .01];
 
 blockMeshCreator(node)
 

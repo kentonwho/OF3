@@ -1,15 +1,15 @@
 clear all; clc; close all;
 
-inlet_d = 25;
-choke_d = 1;
+inlet_d = .25;
+choke_d = .01;
 outlet_d = 35;
 
 choke_length = 0;
 inlet_angle = .27494; 
 outlet_angle = .25568;
 
-inlet_length = 27.62528;
-outlet_length = 50;
+inlet_length = .2762528;
+outlet_length = .50;
 
 node(1,:) = [0 0 0];
 node(2,:) = [inlet_length*cos(inlet_angle) inlet_length*sin(inlet_angle) 0];
@@ -55,7 +55,7 @@ function blockMeshCreator(vertices)
     fprintf(FID, 'blocks\n(\n');
     fprintf(FID, 'hex (0 1 4 3 6 7 10 9) (20 20 1) simpleGrading (1 1 1)\n');
     fprintf(FID, 'hex (1 2 5 4 7 8 11 10) (20 20 1) simpleGrading (1 1 1)\n');
-    fprintf(FID, 'hex (12 0 9 15 14 6 9 15) (20 20 1) simpleGrading (1 1 1)\n');
+    fprintf(FID, 'hex (12 0 3 13 14 6 9 15) (20 20 1) simpleGrading (1 1 1)\n');
     fprintf(FID, 'hex (2 16 17 5 8 18 19 11) (20 20 1) simpleGrading (1 1 1)\n');
     fprintf(FID, ');\n\n');
     
@@ -90,7 +90,7 @@ function blockMeshCreator(vertices)
     fprintf(FID, '\n \t\ttype symmetryPlane;\n \t\tfaces\n\t\t(');
     
     % Probably hard code the faces
-    fprintf(FID, '\n\t\t\t(13 14 6 0)');
+    fprintf(FID, '\n\t\t\t(12 14 6 0)');
     fprintf(FID, '\n\t\t\t(2 8 18 16)');
 
     fprintf(FID, '\n\t\t);\n\t}\n'); 

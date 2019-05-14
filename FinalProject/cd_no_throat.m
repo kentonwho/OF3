@@ -1,12 +1,12 @@
 clear all; clc; close all;
 
-
+d_to_r = pi/180;
 choke_d = .01;
 
-
 choke_length = 0;
-inlet_angle = .27494; 
-outlet_angle = 1.0472;
+inlet_angle = d_to_r*25; 
+%inlet_angle = .5;
+outlet_angle = d_to_r*45;
 
 inlet_length = .2762528;
 outlet_length = .50;
@@ -32,16 +32,20 @@ node(18,:) = [node(3,1)+.10 node(3,2)+outlet_d 0];
 node(19,:) = [node(3,1)+.10 node(3,2) .01];
 node(20,:) = [node(3,1)+.10 node(3,2)+outlet_d .01];
 
-blockMeshCreator(node)
+blockMeshCreator(node,inlet_length,outlet_length,choke_d,inlet_angle,outlet_angle)
 
-function blockMeshCreator(vertices)
+function blockMeshCreator(vertices,inlet_length,outlet_length,choke_d,inlet_angle,outlet_angle)
     %Create file with write
     FName = 'blockMeshDict';
     FID = fopen(FName, 'w');
     
     %Write Header
     fprintf(FID, '//OpenFOAM blockMeshDict\n');
-
+    fprintf(FID, '//inlet_lenght = %d\n', inlet_length);
+    fprintf(FID, '//outlet_length = %d\n', outlet_length);
+    fprintf(FID, '//choke_d = %d\n', choke_d);
+    fprintf(FID, '//inlet_angle = %d\n', inlet_angle);
+    fprintf(FID, '//outlet_angle = %d\n', outlet_angle);    
     fprintf(FID, 'FoamFile\n{\n  version\t2.0;\n  format\tascii;\n  class\t\tdictionary;\n  object\tblockMeshDict;\n}\n\n');
     fprintf(FID, 'convertToMeters 1.0;\n\n');
     

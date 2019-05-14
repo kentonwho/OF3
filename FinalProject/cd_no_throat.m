@@ -1,8 +1,8 @@
 clear all; clc; close all;
 
-inlet_d = .25;
+
 choke_d = .01;
-outlet_d = .35;
+
 
 choke_length = 0;
 inlet_angle = .27494; 
@@ -15,12 +15,14 @@ node(1,:) = [0 0 0];
 node(2,:) = [inlet_length*cos(inlet_angle) inlet_length*sin(inlet_angle) 0];
 node(3,:) = [node(2,1)+outlet_length*cos(outlet_angle) node(2,2)-outlet_length*sin(outlet_angle) 0];
 
-node(4,:) =[node(1,1) node(1,2)+inlet_d 0];  
+node(4,:) =[node(1,1) node(2,2)+choke_d+inlet_length*sin(inlet_angle) 0];  
 node(5,:) =[node(2,1) node(2,2)+choke_d 0];
-node(6,:) = [node(3,1) node(2,2)+outlet_length*sin(outlet_angle) 0];
+node(6,:) = [node(3,1) node(2,2)+choke_d+outlet_length*sin(outlet_angle) 0];
 for i=7:12
    node(i,:) = [node(i-6,1:2) .01]; 
 end
+inlet_d = node(4,2)-node(1,2);
+outlet_d = node(6,2) -node(3,2);
 node(13,:) = [-.1 0 0];
 node(14,:) = [-.1 inlet_d 0];
 node(15,:) = [-.10 0 .01];

@@ -2,11 +2,11 @@ clear all; clc; close all;
 
 inlet_d = .25;
 choke_d = .01;
-outlet_d = 35;
+outlet_d = .35;
 
 choke_length = 0;
 inlet_angle = .27494; 
-outlet_angle = .25568;
+outlet_angle = 1.0472;
 
 inlet_length = .2762528;
 outlet_length = .50;
@@ -21,14 +21,14 @@ node(6,:) = [node(3,1) node(3,2)+outlet_d 0];
 for i=7:12
    node(i,:) = [node(i-6,1:2) .01]; 
 end
-node(13,:) = [-10 0 0];
-node(14,:) = [-10 inlet_d 0];
-node(15,:) = [-10 0 .01];
-node(16,:) = [-10 inlet_d .01];
-node(17,:) = [node(3,1)+10 node(3,2) 0];
-node(18,:) = [node(3,1)+10 node(3,2)+outlet_d 0];
-node(19,:) = [node(3,1)+10 node(3,2) .01];
-node(20,:) = [node(3,1)+10 node(3,2)+outlet_d .01];
+node(13,:) = [-.1 0 0];
+node(14,:) = [-.1 inlet_d 0];
+node(15,:) = [-.10 0 .01];
+node(16,:) = [-.10 inlet_d .01];
+node(17,:) = [node(3,1)+.10 node(3,2) 0];
+node(18,:) = [node(3,1)+.10 node(3,2)+outlet_d 0];
+node(19,:) = [node(3,1)+.10 node(3,2) .01];
+node(20,:) = [node(3,1)+.10 node(3,2)+outlet_d .01];
 
 blockMeshCreator(node)
 
@@ -53,10 +53,10 @@ function blockMeshCreator(vertices)
     
     %Block Section
     fprintf(FID, 'blocks\n(\n');
-    fprintf(FID, 'hex (0 1 4 3 6 7 10 9) (20 20 1) simpleGrading (1 1 1)\n');
-    fprintf(FID, 'hex (1 2 5 4 7 8 11 10) (20 20 1) simpleGrading (1 1 1)\n');
-    fprintf(FID, 'hex (12 0 3 13 14 6 9 15) (20 20 1) simpleGrading (1 1 1)\n');
-    fprintf(FID, 'hex (2 16 17 5 8 18 19 11) (20 20 1) simpleGrading (1 1 1)\n');
+    fprintf(FID, 'hex (0 1 4 3 6 7 10 9) (60 60 1) simpleGrading (1 1 1)\n');
+    fprintf(FID, 'hex (1 2 5 4 7 8 11 10) (60 60 1) simpleGrading (1 1 1)\n');
+    fprintf(FID, 'hex (12 0 3 13 14 6 9 15) (60 60 1) simpleGrading (1 1 1)\n');
+    fprintf(FID, 'hex (2 16 17 5 8 18 19 11) (60 60 1) simpleGrading (1 1 1)\n');
     fprintf(FID, ');\n\n');
     
     % Boundary
